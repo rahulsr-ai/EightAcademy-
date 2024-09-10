@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!-- Tailwind CSS CDN -->
+</head>
+
+<body>
+    <main class="min-h-screen bg-zinc-900 w-full py-6 px-10">
+
+
+        <h1 class="text-2xl font-bold mb-2 text-yellow-500">All Users</h1>
+        <a href="/" class="text-blue-500 text-xl mb-2">Go back to home</a>
+
+        <div class="flex flex-wrap gap-4  p-2 mt-2 ">
+
+
+            <% users.forEach(user=> { %>
+                <div class="border p-2 rounded-sm min-w-[220px] bg-gray-950">
+                    <div class="w-full h-[160px] bg-red-500 rounded-md mb-4"></div>
+                    <div class="flex flex-col gap-1 text-white">
+                        <h1 class="text-sm">Name: <span class="text-blue-400">
+                                <%= user.name %>
+                            </span></h1>
+                        <h1>Email: <span class="text-blue-400">
+                                <%= user.email %>
+                            </span></h1>
+                        <h1 class="text-sm">Username: <span class="text-red-500">
+                                <%= user.Username %>
+                            </span></h1>
+                    </div>
+                    <div class="flex justify-between px-5 mt-4">
+                        <a href="/edit/<%= user._id %>" class="text-yellow-500">Edit</a>
+                        <a href="/delete/<%= user._id %>" class="text-red-500">Delete</a>
+                    </div>
+                </div>
+                <% }) %>
+
+
+        </div>
+
+
+
+    </main>
+</body>
+
+</html>
