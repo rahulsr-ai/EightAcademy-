@@ -9,16 +9,15 @@ import Router from './Routes/HandleAppRoute.js'
 ConnectDb()
 const app = express()
 
+
 app.use(express.json())
 
 app.use(express.urlencoded({extended: true}))  ;
 
 
+// default route 
 app.use("/", Router);
 
-app.use("/id", Router);
-
-app.use("/auth" , Router )
 
 
 

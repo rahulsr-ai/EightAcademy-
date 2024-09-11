@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 async function connectDb() {
     try {
-        let databaseConnect = await mongoose.connect('mongodb://localhost:27017/testDB')
+        let databaseConnect = await mongoose.connect('mongodb://localhost:27017/AuthTesting')
         console.log('database connected sucessfully');
 
     } catch (error) {

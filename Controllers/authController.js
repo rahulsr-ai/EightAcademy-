@@ -86,25 +86,27 @@ export const authLogin = async (req, res) => {
 
         let user = await User.findOne({ email });
 
-        if (!user) {
+        if (!user) { // if user not found in the database it will give error
             return res.status(401).send({
                 success: false,
                 message: "wrong email id"
             })
         }
 
+        //  comparing the password with hashed password from the database 
         let match = await passwordCompare(password, user.password)
 
-        if (!match) {
+        // if password not match it will give error 
+        if (!match) { // match will be false if password not match
             return res.status(401).send({
                 success: false,
                 message: "wrong password"
             })
         }
 
-
-        const token=await JWT.sign({_id:user._id},process.env.secret_key,{
-            expiresIn:"7d"
+        //  providing token to the user after login successfully so that user can access protected routes
+        const token = await JWT.sign({ _id: user._id }, process.env.secret_key, {
+            expiresIn: "7d"
         })
 
 
@@ -115,7 +117,7 @@ export const authLogin = async (req, res) => {
                 name: user.name,
                 email: user.email
             }
-            ,token
+            , token
         })
 
     }
@@ -132,12 +134,12 @@ export const authLogin = async (req, res) => {
 
 }
 
-export const usertest=async(req,res)=>{
-try {
-    res.send("protected routes")
-} catch (error) {
-    console.log(error)
-    console.log("error in usertest")
-}
+export const usertest = async (req, res) => {
+    try {
+        res.send("protected routes")
+    } catch (error) {
+        console.log(error)
+        console.log("error in usertest")
+    }
 }
 

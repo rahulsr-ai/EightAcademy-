@@ -23,6 +23,7 @@ app.use(express.json()); // This is crucial for req.body to be populated
 
 app.use("/api/v1/auth",router)
 
+
 app.get("/", (req,res) => { 
     res.send('default page')
 })
