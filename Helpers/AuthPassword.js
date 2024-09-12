@@ -5,7 +5,7 @@ const {hash} = pkg;
 // Encrypting the password ;
 
 export const encryptPassword = async (password) => {
-    const {data, saltRound} = pkg
+    // const {data, saltRound} = pkg
     
     try {
         const saltRound = 10
