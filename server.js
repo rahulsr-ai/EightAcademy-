@@ -6,13 +6,13 @@ import router from './Routes/authRoute.js';
 
 
 dbconnect()
-let PORT=process.env.PORT||5600;
+let PORT = process.env.PORT || 5600;
 dotenv.config();
-let app=express();
+let app = express();
 
 
-app.set('view engine', 'ejs') 
-app.set('views',  './views')
+app.set('view engine', 'ejs')
+app.set('views', './views')
 
 
 
@@ -21,22 +21,36 @@ app.set('views',  './views')
 app.use(express.json()); // This is crucial for req.body to be populated
 
 
-app.use("/api/v1/auth",router)
+app.use("/api/v1/auth", router)
 
-app.get("/", (req,res) => { 
+app.get("/", (req, res) => {
     res.send('default page')
 })
 
 
 
-app.get("/login", (req, res) => { 
-      res.render("AuthReplica/login.ejs")
+
+
+
+
+// app.get("/random", (req, res) => {
+//     let data = {
+//         name: 'something',
+//         password: 'something'
+//     };
+//     res.json(data); 
+// })
+
+
+
+app.get("/login", (req, res) => {
+    res.render("AuthReplica/login.ejs")
 })
 
 
 
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`your server runing port no ${PORT} `)
 })
 

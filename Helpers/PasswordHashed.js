@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt'
 
+
+
 // Encrpting the password 
 export const hashPassword=async(password) => {
     try {
@@ -17,3 +19,6 @@ export const hashPassword=async(password) => {
 export const passwordCompare=async(password,hasedPassword)=>{
 return bcrypt.compare(password,hasedPassword)
 }
+
+
+

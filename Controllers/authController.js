@@ -38,10 +38,11 @@ export const registerController = async (req, res) => {
             })
 
         }
+
         const hashedPassword = await hashPassword(password);
 
         // Here we creating new user in the MONGO DATABASE 
-        const user = await new User({ name, email, password: hashedPassword, phone, address })
+        const user = await new User({ name, email, password: hashedPassword, phone, address,role:0 })
         await user.save()
 
         return res.status(200).send({
