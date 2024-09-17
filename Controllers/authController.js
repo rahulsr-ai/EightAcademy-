@@ -3,6 +3,8 @@ import { hashPassword, passwordCompare } from '../Helpers/PasswordHashed.js';
 import { User } from '../Models/User.model.js';
 import JWT from 'jsonwebtoken'
 
+
+// Creating User in the database 
 export const registerController = async (req, res) => {
 
     try {
@@ -42,7 +44,7 @@ export const registerController = async (req, res) => {
         const hashedPassword = await hashPassword(password);
 
         // Here we creating new user in the MONGO DATABASE 
-        const user = await new User({ name, email, password: hashedPassword, phone, address,role:0 })
+        const user = await new User({ name, email, password: hashedPassword, phone, address,  })
         await user.save()
 
         return res.status(200).send({
@@ -82,9 +84,9 @@ export const authLogin = async (req, res) => {
                 message: "invaild email or password",
             })
 
-
         }
 
+        
         let user = await User.findOne({ email });
 
         if (!user) {
@@ -95,6 +97,7 @@ export const authLogin = async (req, res) => {
         }
 
         let match = await passwordCompare(password, user.password)
+        console.log(password);
 
         if (!match) {
             return res.status(401).send({
@@ -104,8 +107,8 @@ export const authLogin = async (req, res) => {
         }
 
 
-        const token=await JWT.sign({_id:user._id},process.env.secret_key,{
-            expiresIn:"7d"
+        const token = await JWT.sign({ _id: user._id }, process.env.secret_key, {
+            expiresIn: "7d"
         })
 
 
@@ -113,11 +116,14 @@ export const authLogin = async (req, res) => {
             success: true,
             message: "loged in successfully",
             user: {
+                email: user.email,
                 name: user.name,
-                email: user.email
+                password: user.password
             }
-            ,token
+            , token
+
         })
+
 
     }
 
@@ -133,12 +139,12 @@ export const authLogin = async (req, res) => {
 
 }
 
-export const usertest=async(req,res)=>{
-try {
-    res.send("protected routes")
-} catch (error) {
-    console.log(error)
-    console.log("error in usertest")
-}
+export const usertest = async (req, res) => {
+    try {
+        res.send("protected routes")
+    } catch (error) {
+        console.log(error)
+        console.log("error in usertest")
+    }
 }
 
